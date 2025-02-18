@@ -1,7 +1,9 @@
+import { Input } from "@/components/input";
+
 export default function Home() {
   return (
     <main>
-      <div>Hello world!</div>
+      <Input placeholder="Digite aqui" name="mail"  />
     </main>
   );
 }
