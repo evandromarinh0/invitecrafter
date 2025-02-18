@@ -1,9 +1,12 @@
-import { Mail, User } from "lucide-react";
+import { Copy, Link, Mail, User } from "lucide-react";
 import { ComponentProps } from "react";
+import { IconButton } from "./iconButton";
 
 interface InputProps extends ComponentProps<'input'> {
   error?: boolean;
   name?: string;
+  button?: string;
+  read?: string;
 }
 
 export function Input(props: InputProps){
@@ -14,6 +17,8 @@ export function Input(props: InputProps){
       return <Mail className="size-5" />;
       case "user":
       return <User className="size-5" />;
+      case "link":
+      return <Link className="size-5" />;
       default:
         return <></>
     }
@@ -26,7 +31,13 @@ export function Input(props: InputProps){
         {getIcon(props.name ?? '')}
       </span>
 
-      <input className="bg-transparent flex-1 outline-0 placeholder-gray-400" {...props} />
+      <input readOnly={props.read === "readOnly"} className="bg-transparent flex-1 outline-0 placeholder-gray-400" {...props} />
+
+      {props.button === "true" && (
+        <IconButton className="-mr-2">
+          <Copy className="size-5" />
+        </IconButton>
+      )}
     </div>
   )
 }
