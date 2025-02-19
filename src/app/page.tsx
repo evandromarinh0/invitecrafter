@@ -1,10 +1,29 @@
+'use client'
 import Image from "next/image";
 import logo from '../assets/logo.svg';
 import { ArrowRight, Radio } from "lucide-react";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const subscriptionSchema = z.object({
+  name: z.string().min(2, 'Digite seu nome completo'),
+  email: z.string().email('Digite um e-mail válido')
+})
+
+type subscritionProps = z.infer<typeof subscriptionSchema>
 
 export default function Home() {
+  const { handleSubmit, register, formState: { errors }  } = useForm<subscritionProps>({
+    resolver: zodResolver(subscriptionSchema)
+  });
+
+  function onSubmit(data: any){
+    console.log(onSubmit)
+  }
+
   return (
     <div className="min-h-dvh flex flex-col justify-center gap-16">
       <div className="flex flex-col gap-8 items-center md:items-start">
@@ -32,12 +51,22 @@ export default function Home() {
           </p>
         </div>
 
-        <form className="bg-gray-700 border border-gray-600 rounded-2xl p-8 space-y-6 w-full md:max-w-[440px]">
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-700 border border-gray-600 rounded-2xl p-8 space-y-6 w-full md:max-w-[440px]">
           <h2 className="font-heading font-semibold text-gray-200 text-xl">Inscrição</h2>
 
           <div className="space-y-3">
-            <Input name="user" type="text" placeholder="Nome completo" />
-            <Input name="mail" type="email" placeholder="E-mail" />
+            <div className="space-y-2">
+              <Input type="text" placeholder="Nome completo" {...register('name')} />
+              {errors?.name && (
+                <p className="text-danger text-xs font-semibold">{errors.name.message}</p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <Input type="email" placeholder="E-mail" {...register('email')} />
+              {errors?.email && (
+                <p className="text-danger text-xs font-semibold">{errors.email.message}</p>
+              )}
+            </div>
           </div>
 
           <div className="border-black border rounded-xl">

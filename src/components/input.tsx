@@ -7,6 +7,7 @@ interface InputProps extends ComponentProps<'input'> {
   name?: string;
   button?: string;
   read?: string;
+  link?: string;
 }
 
 export function Input(props: InputProps){
@@ -34,7 +35,7 @@ export function Input(props: InputProps){
       <input readOnly={props.read === "readOnly"} className="bg-transparent flex-1 outline-0 placeholder-gray-400" {...props} />
 
       {props.button === "true" && (
-        <IconButton className="-mr-2">
+        <IconButton link={props.link} className="-mr-2">
           <Copy className="size-5" />
         </IconButton>
       )}

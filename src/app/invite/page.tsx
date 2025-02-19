@@ -8,6 +8,8 @@ import silverMedal from "../../assets/silver-medal.svg";
 import bronzeMedal from "../../assets/bronze-medal.svg";
 
 export default function InvitePage(){
+  const inviteLink = 'http://devstage.com.br/44557a9ss7ad';
+
   return(
     <div className="min-h-dvh flex items-center justify-between gap-16 flex-col md:flex-row">
       <div className="flex flex-col gap-10 w-full max-w-[550px]">
@@ -24,7 +26,7 @@ export default function InvitePage(){
             <p className="text-gray-300">Convide mais pessoas para o evento e concorra a prêmios exclusivos! É só compartilhar o link abaixo e acompanhar as inscrições:</p>
           </div>
 
-          <Input defaultValue="https://devstage.com.br/1224457caasv4" name="link" button="true" read="readOnly" />
+          <Input defaultValue="https://devstage.com.br/1224457caasv4" name="link" button="true" read="readOnly" link={inviteLink} />
 
           <div className="grid gap-3 md:grid-cols-3">
             <div className="relative bg-gray-700 border border-gray-600 px-4 py-7 flex flex-col items-center justify-center gap-1 rounded-xl">
